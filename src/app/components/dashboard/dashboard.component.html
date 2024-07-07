@@ -1,0 +1,69 @@
+<div class="upload-container">
+  <label for="formFile" class="form-label">Upload PDF file</label>
+  <input type="file" id="formFile" (change)="onFileSelected($event)" accept=".pdf" class="form-control form-control-sm" />
+  <button (click)="uploadPDF()" class="btn btn-primary mt-3">Upload</button>
+
+  <div *ngIf="selectedFile">
+      <p class="mt-3">Selected PDF: {{ selectedFile!.name }}</p>
+  </div>
+
+  <div *ngIf="uploadResponse">
+      <h3 class="mt-3">Response Data</h3>
+      <div class="form-group">
+        <label for="image">image</label>
+        <img [src]="'data:image/png;base64,' + uploadResponse.image" class="form-control" id="image" alt="Image" style="max-width: 200px; max-height: 200px;" />
+    </div>
+      <div class="form-group">
+          <label for="firstname">First Name</label>
+          <input type="text" class="form-control" id="firstname" [value]="uploadResponse.firstname" />
+      </div>
+      <div class="form-group">
+          <label for="lastname">Last Name</label>
+          <input type="text" class="form-control" id="lastname" [value]="uploadResponse.lastname" />
+      </div>
+      <div class="form-group">
+          <label for="localityName">Locality Name</label>
+          <input type="text" class="form-control" id="localityName" [value]="uploadResponse.localityName" />
+      </div>
+      <div class="form-group">
+          <label for="town">Town</label>
+          <input type="text" class="form-control" id="town" [value]="uploadResponse.town" />
+      </div>
+      <div class="form-group">
+          <label for="number">Number</label>
+          <input type="text" class="form-control" id="number" [value]="uploadResponse.number" />
+      </div>
+      <div class="form-group">
+          <label for="cardId">Card ID</label>
+          <input type="text" class="form-control" id="cardId" [value]="uploadResponse.cardId" />
+      </div>
+      <div class="form-group">
+          <label for="job">Job</label>
+          <input type="text" class="form-control" id="job" [value]="uploadResponse.job" />
+      </div>
+      <div class="form-group">
+          <label for="sex">Sex</label>
+          <input type="text" class="form-control" id="sex" [value]="uploadResponse.sex" />
+      </div>
+      <div class="form-group">
+          <label for="religion">Religion</label>
+          <input type="text" class="form-control" id="religion" [value]="uploadResponse.religion" />
+      </div>
+      <div class="form-group">
+          <label for="marital_status">Marital Status</label>
+          <input type="text" class="form-control" id="marital_status" [value]="uploadResponse.marital_status" />
+      </div>
+      <div class="form-group">
+          <label for="validity_date">Validity Date</label>
+          <input type="text" class="form-control" id="validity_date" [value]="uploadResponse.validity_date" />
+      </div>
+      <div class="form-group">
+          <label for="release_date">Release Date</label>
+          <input type="text" class="form-control" id="release_date" [value]="uploadResponse.release_date" />
+      </div>
+  </div>
+
+  <div *ngIf="uploadError" class="mt-3">
+      <p class="error">{{ uploadError }}</p>
+  </div>
+</div>
