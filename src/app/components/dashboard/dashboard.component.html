@@ -1,69 +1,84 @@
 <div class="upload-container">
   <label for="formFile" class="form-label">Upload PDF file</label>
-  <input type="file" id="formFile" (change)="onFileSelected($event)" accept=".pdf" class="form-control form-control-sm" />
+  <input
+    type="file"
+    id="formFile"
+    (change)="onFileSelected($event)"
+    accept=".pdf"
+    class="form-control form-control-sm"
+  />
   <button (click)="uploadPDF()" class="btn btn-primary mt-3">Upload</button>
 
   <div *ngIf="selectedFile">
-      <p class="mt-3">Selected PDF: {{ selectedFile!.name }}</p>
+    <p class="mt-3">Selected PDF: {{ selectedFile!.name }}</p>
   </div>
 
   <div *ngIf="uploadResponse">
-      <h3 class="mt-3">Response Data</h3>
-      <div class="form-group">
-        <label for="image">image</label>
-        <img [src]="'data:image/png;base64,' + uploadResponse.image" class="form-control" id="image" alt="Image" style="max-width: 200px; max-height: 200px;" />
-    </div>
-      <div class="form-group">
-          <label for="firstname">First Name</label>
-          <input type="text" class="form-control" id="firstname" [value]="uploadResponse.firstname" />
+    <form [formGroup]="cardForm" (ngSubmit)="onSubmit()" class="card mt-3 p-3">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="firstname">First Name</label>
+            <input type="text" class="form-control" id="firstname" formControlName="firstname" />
+          </div>
+          <div class="form-group">
+            <label for="lastname">Last Name</label>
+            <input type="text" class="form-control" id="lastname" formControlName="lastname" />
+          </div>
+          <div class="form-group">
+            <label for="localityName">Locality Name</label>
+            <input type="text" class="form-control" id="localityName" formControlName="localityName" />
+          </div>
+          <div class="form-group">
+            <label for="town">Town</label>
+            <input type="text" class="form-control" id="town" formControlName="town" />
+          </div>
+          <div class="form-group">
+            <label for="number">Number</label>
+            <input type="text" class="form-control" id="number" formControlName="number" />
+          </div>
+          <div class="form-group">
+            <label for="cardId">Card ID</label>
+            <input type="text" class="form-control" id="cardId" formControlName="cardId" />
+          </div>
+          <div class="form-group">
+            <label for="job">Job</label>
+            <input type="text" class="form-control" id="job" formControlName="job" />
+          </div>
+          <div class="form-group">
+            <label for="sex">Sex</label>
+            <input type="text" class="form-control" id="sex" formControlName="sex" />
+          </div>
+          <div class="form-group">
+            <label for="religion">Religion</label>
+            <input type="text" class="form-control" id="religion" formControlName="religion" />
+          </div>
+          <div class="form-group">
+            <label for="maritalStatus">Marital Status</label>
+            <input type="text" class="form-control" id="maritalStatus" formControlName="maritalStatus" />
+          </div>
+          <div class="form-group">
+            <label for="validityDate">Validity Date</label>
+            <input type="text" class="form-control" id="validityDate" formControlName="validityDate" />
+          </div>
+          <div class="form-group">
+            <label for="releaseDate">Release Date</label>
+            <input type="text" class="form-control" id="releaseDate" formControlName="releaseDate" />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <img id="image" loading="lazy" [src]="'data:image/png;base64,' + uploadResponse.image" class="img-fluid" />
+        </div>
       </div>
-      <div class="form-group">
-          <label for="lastname">Last Name</label>
-          <input type="text" class="form-control" id="lastname" [value]="uploadResponse.lastname" />
+      <div class="form-group mt-3">
+        <label for="code_qr">QR Code</label>
+        <textarea class="form-control" id="code_qr"  formControlName="code_qr"></textarea>
       </div>
-      <div class="form-group">
-          <label for="localityName">Locality Name</label>
-          <input type="text" class="form-control" id="localityName" [value]="uploadResponse.localityName" />
-      </div>
-      <div class="form-group">
-          <label for="town">Town</label>
-          <input type="text" class="form-control" id="town" [value]="uploadResponse.town" />
-      </div>
-      <div class="form-group">
-          <label for="number">Number</label>
-          <input type="text" class="form-control" id="number" [value]="uploadResponse.number" />
-      </div>
-      <div class="form-group">
-          <label for="cardId">Card ID</label>
-          <input type="text" class="form-control" id="cardId" [value]="uploadResponse.cardId" />
-      </div>
-      <div class="form-group">
-          <label for="job">Job</label>
-          <input type="text" class="form-control" id="job" [value]="uploadResponse.job" />
-      </div>
-      <div class="form-group">
-          <label for="sex">Sex</label>
-          <input type="text" class="form-control" id="sex" [value]="uploadResponse.sex" />
-      </div>
-      <div class="form-group">
-          <label for="religion">Religion</label>
-          <input type="text" class="form-control" id="religion" [value]="uploadResponse.religion" />
-      </div>
-      <div class="form-group">
-          <label for="marital_status">Marital Status</label>
-          <input type="text" class="form-control" id="marital_status" [value]="uploadResponse.marital_status" />
-      </div>
-      <div class="form-group">
-          <label for="validity_date">Validity Date</label>
-          <input type="text" class="form-control" id="validity_date" [value]="uploadResponse.validity_date" />
-      </div>
-      <div class="form-group">
-          <label for="release_date">Release Date</label>
-          <input type="text" class="form-control" id="release_date" [value]="uploadResponse.release_date" />
-      </div>
+      <button type="submit" class="btn btn-success mt-3">Submit</button>
+    </form>
   </div>
 
   <div *ngIf="uploadError" class="mt-3">
-      <p class="error">{{ uploadError }}</p>
+    <p class="error">{{ uploadError }}</p>
   </div>
 </div>
